@@ -1,0 +1,13 @@
+.cell {
+  border: black 1px solid;
+  height: 19px;
+  width: 2%;
+  padding: 0;
+  margin: 0;
+  float: left;
+  border-radius: 15%;
+}
+.cellIcon {
+  width: auto !important;
+  height: auto !important;
+}

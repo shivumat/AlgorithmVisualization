@@ -2,9 +2,9 @@ import React from 'react';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 import SortIcon from '@material-ui/icons/Sort';
 import StorageIcon from '@material-ui/icons/Storage';
-import PathFinder from '../components/menu/pathFinder/PathFinder';
-import Sort from '../components/menu/sort/Sort';
-import DataStructure from '../components/menu/dataStructure/DataStructure';
+import PathFinder from '../components/menu/tabPanel/pathFinder/PathFinder';
+import Sort from '../components/menu/tabPanel/sort/Sort';
+import DataStructure from '../components/menu/tabPanel/dataStructure/DataStructure';
 
 export default [
     {

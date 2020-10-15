@@ -1,0 +1,4 @@
+.cellRow {
+  height: 20px;
+  display: flex !important;
+}
