@@ -11,3 +11,13 @@
   width: auto !important;
   height: auto !important;
 }
+.cellVisited {
+  width: auto !important;
+  height: auto !important;
+  background-color: darkseagreen;
+}
+.cellPath {
+  width: auto !important;
+  height: auto !important;
+  background-color: gold;
+}
