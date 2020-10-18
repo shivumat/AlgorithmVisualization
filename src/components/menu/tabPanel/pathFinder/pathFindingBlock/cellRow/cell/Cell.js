@@ -58,7 +58,7 @@ export default function Cell(props){
         }
     }
 
-    return (<div className='cell' >
+    return (<div className='cell' onMouseDown={onCellMouseDown} onMouseEnter={onCellMouseOver} onMouseUp={onCellMouseUp}>
             {getCellContent()}
         </div>)
 
