@@ -4,15 +4,15 @@ import './CellRow.css'
 
 export default function CellRow(props){
 
-    const { start, stop, visited, visiting , path} = props;
+    const { start, stop, visitStatus , path} = props;
 
     const isStartCell = (column) => column.xCord===start.xCord && props.yCord===start.yCord;
 
     const isStopCell = (column) => column.xCord===stop.xCord && props.yCord===stop.yCord;
 
-    const isVisitedCell = (column) => visited.some((node) => column.xCord === node.xCord && props.yCord === node.yCord);
+    const isVisitedCell = (column) => visitStatus.some((node) => node.visited && column.xCord === node.xCord && props.yCord === node.yCord);
 
-    const isVisitingCell = (column) => visiting.some((node) => column.xCord === node.xCord && props.yCord === node.yCord);
+    const isVisitingCell = (column) => visitStatus.some((node) => (!node.visited) && column.xCord === node.xCord && props.yCord === node.yCord);
 
     const isPathCell = (column) => path.some((node) => column.xCord === node.xCord && props.yCord === node.yCord);
 

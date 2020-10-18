@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PathFinderButtons from './pathFinderBar/PathFinderBar';
 import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
-import Modal from '@material-ui/core/Modal';
 import findPath from '../../../../static/algorithms/index';
 import {DIJKSTRAS} from '../../../../static/algorithms/index';
 import './PathFinder.css';
@@ -15,7 +14,7 @@ export default function PathFinder(props){
     const [stop, setStop] = React.useState({'xCord' : 40, 'yCord' : 10});
     const [walls, setWalls] = React.useState([]);
     const [path, setPath] = React.useState([]);
-    const [visitStatus, setVisitStatus] = React.useState({'visited' : [], 'visiting' : []});
+    const [visitStatus, setVisitStatus] = React.useState([]);
     const [weighted, setWeighted] = React.useState([]);
     const [dragStart, setDragStart] = React.useState(false);
     const [dragStop, setDragStop] = React.useState(false);
@@ -26,8 +25,7 @@ export default function PathFinder(props){
         var node = stop;
         var finalPath = [];
         while(node.xCord !== start.xCord || node.yCord !== start.yCord){
-            console.log(node.xCord, node.yCord)
-            let pathNode = (visitStatus.visited.find((visit) => visit.xCord === node.xCord && visit.yCord === node.yCord)).previous;
+            let pathNode = (visitStatus.find((visit) => visit.xCord === node.xCord && visit.yCord === node.yCord)).previous;
             finalPath.push(pathNode);
             node = pathNode;
         }
@@ -35,22 +33,27 @@ export default function PathFinder(props){
     }
 
     useEffect(() =>{
-        if(isLoading){
-            var reslutVisitStatus = findPath(start, stop, walls, visitStatus, weighted ,DIJKSTRAS, columns, rows);
-            setVisitStatus(reslutVisitStatus);
+        if(isLoading && visitStatus.length === 0){
+            let resultVisitStatus = findPath(start, stop, walls, visitStatus, weighted ,DIJKSTRAS, columns, rows);
+            setVisitStatus(resultVisitStatus)
         }
-        if(isLoading && visitStatus.visited.some((node) => node.xCord !== stop.xCord || node.yCord !== stop.yCord)){
-            var reslutVisitStatus = findPath(start, stop, walls, visitStatus, weighted ,DIJKSTRAS, columns, rows);
-            setVisitStatus(reslutVisitStatus);
+        if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => !(node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord))){
+            let resultVisitStatus = visitStatus;
+            let i = 5;
+            while(i !== 0){
+                resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weighted ,DIJKSTRAS, columns, rows);
+                i--;
+            }
+            setVisitStatus(resultVisitStatus)
         }
-        if(isLoading && visitStatus.visited.some((node) => node.xCord === stop.xCord && node.yCord === stop.yCord)){
+       if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord)){
             var finalPath = getPathFromStop();
             setPath(finalPath);
         }
         if(path.length !== 0){
             setIsLoading(false);
         }
-     },[isLoading, visitStatus, path])
+     },[isLoading, visitStatus, path] )
 
     function mouseDownOnCell(xCord, yCord){
         setMouseDown(true);
@@ -117,7 +120,7 @@ export default function PathFinder(props){
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
-                visited = {visitStatus.visited} visiting={visitStatus.visiting}/>
+                visitStatus={visitStatus}/>
         </div>
     );
 }
