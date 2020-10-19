@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PathFinderButtons from './pathFinderBar/PathFinderBar';
 import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
+import Modal from '@material-ui/core/Modal';
 import findPath from '../../../../static/algorithms/index';
 import {DIJKSTRAS} from '../../../../static/enums/algos';
 import {SLOW, MEDIUM, FAST} from '../../../../static/enums/speeds';
@@ -144,6 +145,7 @@ export default function PathFinder(props){
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
                 visitStatus={visitStatus}/>
+            <Modal open={isLoading} BackdropProps={{className: 'loadingBackDrop'}}><div></div></Modal>
         </div>
     );
 }
