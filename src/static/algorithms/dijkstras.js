@@ -7,7 +7,7 @@ const dijkstras = (start, stop, walls, visitStatus, weighted, xLimit, yLimit) =>
         var currentNodeIndex = resultVisitStatus.findIndex((node) => !node.visited);
         var currentNode = resultVisitStatus[currentNodeIndex];
         var northNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , -1, xLimit, yLimit);
-        var westNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0), xLimit, yLimit;
+        var westNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0, xLimit, yLimit);
         var southNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , 1, xLimit, yLimit);
         var eastNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 1 , 0, xLimit, yLimit);
         currentNode.visited = true;
