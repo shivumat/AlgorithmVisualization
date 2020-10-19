@@ -3,7 +3,8 @@ import PathFinderButtons from './pathFinderBar/PathFinderBar';
 import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
 import findPath from '../../../../static/algorithms/index';
-import {DIJKSTRAS} from '../../../../static/algorithms/index';
+import {DIJKSTRAS} from '../../../../static/enums/algos';
+import {SLOW, MEDIUM, FAST} from '../../../../static/enums/speeds';
 import './PathFinder.css';
 
 export default function PathFinder(props){
@@ -20,6 +21,8 @@ export default function PathFinder(props){
     const [dragStop, setDragStop] = React.useState(false);
     const [mouseDown, setMouseDown] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
+    const [algo, setAlgo] = React.useState(DIJKSTRAS);
+    const [speed, setSpeed] = React.useState(SLOW);
 
     const getPathFromStop= () => {
         var node = stop;
@@ -34,14 +37,14 @@ export default function PathFinder(props){
 
     useEffect(() =>{
         if(isLoading && visitStatus.length === 0){
-            let resultVisitStatus = findPath(start, stop, walls, visitStatus, weights ,DIJKSTRAS, columns, rows);
+            let resultVisitStatus = findPath(start, stop, walls, visitStatus, weights ,algo, columns, rows);
             setVisitStatus(resultVisitStatus)
         }
         if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => !(node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord))){
             let resultVisitStatus = visitStatus;
-            let i = 5;
+            let i = speed.value;
             while(i !== 0){
-                resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weights ,DIJKSTRAS, columns, rows);
+                resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weights ,algo, columns, rows);
                 i--;
             }
             setVisitStatus(resultVisitStatus)
@@ -110,12 +113,22 @@ export default function PathFinder(props){
     }
 
     function startLoading(){
+        clearBeforeLoading();
         setIsLoading(true);
     }
 
+    function setFindSpeed(speed){
+        setSpeed(speed);
+    }
+
+    function clearBeforeLoading(){
+        setVisitStatus([]);
+        setPath([]);
+    }
     return (
         <div className='pathFinder' onMouseDown={handelMouseDown} onMouseUp={handelMouseUp}>
-            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]}/>
+            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]} speeds={[SLOW, MEDIUM, FAST]}
+                setFindSpeed={setFindSpeed}/>
             <Divider/>
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell}

@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AlgorithmSelect from './algoSelect/AlgorithmSelect';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import SpeedSelect from './speedSelect/SpeedSelect';
 import './PathFinderBar.css'
 
 
@@ -43,6 +44,7 @@ export default function PathFinderButtons(props) {
             {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
           </Fab>
           <div className={classes.grow} />
+          <SpeedSelect {...props}/>
         </Toolbar>
       </AppBar>
   );
