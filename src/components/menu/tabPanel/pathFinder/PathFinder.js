@@ -121,6 +121,12 @@ export default function PathFinder(props){
         setSpeed(speed);
     }
 
+    function clearBlock(){
+        setWalls([]);
+        setWeights([]);
+        clearBeforeLoading();
+    }
+
     function clearBeforeLoading(){
         setVisitStatus([]);
         setPath([]);
@@ -128,10 +134,10 @@ export default function PathFinder(props){
     return (
         <div className='pathFinder' onMouseDown={handelMouseDown} onMouseUp={handelMouseUp}>
             <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]} speeds={[SLOW, MEDIUM, FAST]}
-                setFindSpeed={setFindSpeed}/>
+                setFindSpeed={setFindSpeed} clearBlock={clearBlock}/>
             <Divider/>
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
-                isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell}
+                isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
                 visitStatus={visitStatus}/>
         </div>

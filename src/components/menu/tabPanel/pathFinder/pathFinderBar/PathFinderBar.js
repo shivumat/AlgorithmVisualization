@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AlgorithmSelect from './algoSelect/AlgorithmSelect';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -40,6 +41,7 @@ export default function PathFinderButtons(props) {
       <AppBar position="static" color="inherit" className={classes.appBar}>
         <Toolbar>
           <AlgorithmSelect {...props}/>
+          <Button variant="contained" color="primary" className="clearButton" onClick={props.clearBlock}>CLEAR</Button>
           <Fab color="primary" aria-label="add" className={classes.fabButton}>
             {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
           </Fab>

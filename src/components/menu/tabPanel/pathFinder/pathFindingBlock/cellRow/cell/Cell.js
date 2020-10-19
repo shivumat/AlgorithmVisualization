@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Cell.css';
 import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
 import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
@@ -9,7 +9,7 @@ import StopIcon from '@material-ui/icons/Stop';
 export default function Cell(props){
     const [isWall,setIsWall] = React.useState(false);
 
-    const {xCord, yCord, mouseDownOnCell, cellOnHover, mouseUpOnCell, isStart , isStop, 
+    const {xCord, yCord, mouseDownOnCell, cellOnHover, mouseUpOnCell, isStart , isStop, isWallCell,
             isMouseDown, isDragStart, isDragStop, isVisited, isVisiting, isPath, isLoading} = props;
 
     function getCellContent(){
@@ -21,6 +21,10 @@ export default function Cell(props){
                 isVisiting  ? <CheckCircleOutlineRoundedIcon color='primary' className='cellIcon'/>    : 
                         '';
     }
+
+    useEffect(()=>{
+        setIsWall(isWallCell);
+    },[isWallCell])
 
     function onCellMouseDown(e){
         if(!isLoading){

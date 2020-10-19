@@ -1,3 +1,6 @@
 .loadingProgress {
   cursor: default;
 }
+.clearButton {
+  margin-left: 2% !important;
+}
