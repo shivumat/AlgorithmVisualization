@@ -6,10 +6,10 @@ const dijkstras = (start, stop, walls, visitStatus, weights, xLimit, yLimit) =>{
     if(resultVisitStatus.length !== 0){
         var currentNodeIndex = resultVisitStatus.findIndex((node) => !node.visited);
         var currentNode = resultVisitStatus[currentNodeIndex];
-        var northNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , -1, xLimit, yLimit);
-        var westNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0, xLimit, yLimit);
-        var southNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , 1, xLimit, yLimit);
-        var eastNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 1 , 0, xLimit, yLimit);
+        var northNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , -1, xLimit, yLimit, walls);
+        var westNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0, xLimit, yLimit, walls);
+        var southNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , 1, xLimit, yLimit, walls);
+        var eastNode = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 1 , 0, xLimit, yLimit, walls);
         currentNode.visited = true;
         resultVisitStatus[currentNodeIndex] = currentNode;
         if(northNode !== undefined){
@@ -28,16 +28,15 @@ const dijkstras = (start, stop, walls, visitStatus, weights, xLimit, yLimit) =>{
     return resultVisitStatus;
 }
 
-const getNeighbourNodeWithShortestDistnace = (currentNode, visitStatus, xOffset , yOffset, xLimit, yLimit ) => {
+const getNeighbourNodeWithShortestDistnace = (currentNode, visitStatus, xOffset , yOffset, xLimit, yLimit, walls) => {
     var neighBourXCord = currentNode.xCord + xOffset;
     var neighBourYCord = currentNode.yCord + yOffset;
-    if(neighBourXCord < 0 || neighBourYCord < 0 || neighBourXCord >= xLimit || neighBourYCord >= yLimit){
+    if(isAccessibleNode(neighBourXCord, neighBourYCord, xLimit, yLimit, walls, visitStatus)){
         return undefined;
     }
     else{
         var neighbourIndex = visitStatus.findIndex((node) => node.visited === false && node.xCord === neighBourXCord && node.yCord === neighBourYCord)
-        var isVisited = visitStatus.some((node) => node.visited === true && node.xCord === neighBourXCord && node.yCord === neighBourYCord)
-        if(isVisited || (neighbourIndex > -1 && visitStatus[neighbourIndex].pathWeight < currentNode.pathWeight + 1)){
+        if(neighbourIndex > -1 && visitStatus[neighbourIndex].pathWeight < currentNode.pathWeight + 1){
             return undefined;
         }else if(neighbourIndex > -1){
             visitStatus.splice(neighbourIndex , 1)
@@ -47,3 +46,9 @@ const getNeighbourNodeWithShortestDistnace = (currentNode, visitStatus, xOffset 
 }
 
 export default dijkstras;
+
+function isAccessibleNode(neighBourXCord, neighBourYCord, xLimit, yLimit, walls, visitStatus) {
+    return neighBourXCord < 0 || neighBourYCord < 0 || neighBourXCord >= xLimit || neighBourYCord >= yLimit ||
+        walls.some((item) => item.xCord === neighBourXCord && item.yCord === neighBourYCord) ||
+        visitStatus.some((item) => item.visited && item.xCord === neighBourXCord && item.yCord === neighBourYCord);
+}
