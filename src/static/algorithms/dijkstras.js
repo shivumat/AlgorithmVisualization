@@ -31,7 +31,7 @@ const getNeighbourNodeWithShortestDistnace = (currentNode, visitStatus, xOffset 
 }
 
 const getCellWeight = (cellA, cellB, weights) => {
-    l//have to be implemented 
+    //have to be implemented 
     return 1;
 }
 
