@@ -2,9 +2,9 @@ import dijkstrasPathFinder from './dijkstras'
 
 export const DIJKSTRAS = 'Dijkstras';
 
-const findPath = (start, stop, walls, visitStatus, weighted, algorithm, xLimit, yLimit) => {
+const findPath = (start, stop, walls, visitStatus, weights, algorithm, xLimit, yLimit) => {
     if(algorithm === DIJKSTRAS){
-        return dijkstrasPathFinder(start, stop, walls, visitStatus, weighted, xLimit, yLimit);
+        return dijkstrasPathFinder(start, stop, walls, visitStatus, weights, xLimit, yLimit);
     }
 }
 

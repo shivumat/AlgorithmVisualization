@@ -1,4 +1,4 @@
-const dijkstras = (start, stop, walls, visitStatus, weighted, xLimit, yLimit) =>{
+const dijkstras = (start, stop, walls, visitStatus, weights, xLimit, yLimit) =>{
     let resultVisitStatus = [...visitStatus];
     if(resultVisitStatus.length === 0){
         resultVisitStatus.push({...start, 'previous' : {start}, 'pathWeight' : 0 , 'visited' :false});

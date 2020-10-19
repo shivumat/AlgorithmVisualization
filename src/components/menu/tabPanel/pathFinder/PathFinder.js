@@ -15,7 +15,7 @@ export default function PathFinder(props){
     const [walls, setWalls] = React.useState([]);
     const [path, setPath] = React.useState([]);
     const [visitStatus, setVisitStatus] = React.useState([]);
-    const [weighted, setWeighted] = React.useState([]);
+    const [weights, setWeights] = React.useState([]);
     const [dragStart, setDragStart] = React.useState(false);
     const [dragStop, setDragStop] = React.useState(false);
     const [mouseDown, setMouseDown] = React.useState(false);
@@ -34,14 +34,14 @@ export default function PathFinder(props){
 
     useEffect(() =>{
         if(isLoading && visitStatus.length === 0){
-            let resultVisitStatus = findPath(start, stop, walls, visitStatus, weighted ,DIJKSTRAS, columns, rows);
+            let resultVisitStatus = findPath(start, stop, walls, visitStatus, weights ,DIJKSTRAS, columns, rows);
             setVisitStatus(resultVisitStatus)
         }
         if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => !(node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord))){
             let resultVisitStatus = visitStatus;
             let i = 5;
             while(i !== 0){
-                resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weighted ,DIJKSTRAS, columns, rows);
+                resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weights ,DIJKSTRAS, columns, rows);
                 i--;
             }
             setVisitStatus(resultVisitStatus)
