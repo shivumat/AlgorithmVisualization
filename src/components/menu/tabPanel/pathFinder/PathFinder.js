@@ -47,14 +47,18 @@ export default function PathFinder(props){
                 resultVisitStatus = findPath(start, stop, walls, resultVisitStatus, weights ,algo, columns, rows);
                 i--;
             }
-            setVisitStatus(resultVisitStatus)
+            if(!resultVisitStatus.some((node) => !node.visited)){
+                setIsLoading(false);
+            }else{
+                setVisitStatus(resultVisitStatus);
+            }
+        }
+        if(path.length !== 0){
+            setIsLoading(false);
         }
        if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord)){
             var finalPath = getPathFromStop();
             setPath(finalPath);
-        }
-        if(path.length !== 0){
-            setIsLoading(false);
         }
      },[isLoading, visitStatus, path] )
 
