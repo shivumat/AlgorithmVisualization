@@ -73,7 +73,7 @@ export default function PathFinder(props){
         else if(stop.xCord === xCord && stop.yCord === yCord){
             setDragStop(true);
         }else{
-            addOrRemoveWall(xCord, yCord);
+            addOrRemoveWallOrWeight(xCord, yCord);
         }
     }
 
@@ -95,20 +95,47 @@ export default function PathFinder(props){
             }
         }
         else if(mouseDown && !dragStart && !dragStop){
-            addOrRemoveWall(xCord, yCord);
+            addOrRemoveWallOrWeight(xCord, yCord);
         }
     }  
 
-    function addOrRemoveWall(xCord, yCord) {
-        var index = walls.findIndex(
-            (wall) => wall.xCord === xCord && wall.yCord === yCord
-        );
-        if (index > -1) {
-            walls.splice(index, 1);
-        } else {
-            walls.push({ xCord: xCord, yCord: yCord });
+    function addOrRemoveWallOrWeight(xCord, yCord) {
+        if(isWeightChecked && weight > 0){
+            console.log('!!')
+            var wallIndex = walls.findIndex(
+                (wall) => wall.xCord === xCord && wall.yCord === yCord
+            );
+            var index = weights.findIndex(
+                (weightCell) => weightCell.xCord === xCord && weightCell.yCord === yCord
+            );
+            if(wallIndex > -1){
+                walls.splice(weightIndex, 1);
+            }
+            if (index > -1) {
+                weights[index].weight = weight;
+            } else {
+                weights.push({ 'xCord': xCord, 'yCord': yCord, 'weight' : weight });
+            }
+            setWalls(walls);
+            setWeights(weights);
+        }else{
+            var weightIndex = weights.findIndex(
+                (weightCell) => weightCell.xCord === xCord && weightCell.yCord === yCord
+            );
+            var index = walls.findIndex(
+                (wall) => wall.xCord === xCord && wall.yCord === yCord
+            );
+            if(weightIndex > -1){
+                weights.splice(weightIndex, 1);
+            }
+            if (index > -1) {
+                walls.splice(index, 1);
+            } else {
+                walls.push({ 'xCord': xCord, 'yCord': yCord });
+            }
+            setWalls(walls);
+            setWeights(weights);
         }
-        setWalls(walls);
     }
 
     function handelMouseDown(e){
@@ -160,7 +187,7 @@ export default function PathFinder(props){
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
-                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked}/>
+                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked && weight > 0}/>
             <Modal open={isLoading} BackdropProps={{className: 'loadingBackDrop'}}><div></div></Modal>
         </div>
     );
