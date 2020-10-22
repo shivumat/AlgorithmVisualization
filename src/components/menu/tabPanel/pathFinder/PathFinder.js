@@ -101,15 +101,14 @@ export default function PathFinder(props){
 
     function addOrRemoveWallOrWeight(xCord, yCord) {
         if(isWeightChecked && weight > 0){
-            console.log('!!')
-            var wallIndex = walls.findIndex(
+            let wallIndex = walls.findIndex(
                 (wall) => wall.xCord === xCord && wall.yCord === yCord
             );
-            var index = weights.findIndex(
+            let index = weights.findIndex(
                 (weightCell) => weightCell.xCord === xCord && weightCell.yCord === yCord
             );
             if(wallIndex > -1){
-                walls.splice(weightIndex, 1);
+                walls.splice(wallIndex, 1);
             }
             if (index > -1) {
                 weights[index].weight = weight;
@@ -119,10 +118,10 @@ export default function PathFinder(props){
             setWalls(walls);
             setWeights(weights);
         }else{
-            var weightIndex = weights.findIndex(
+            let weightIndex = weights.findIndex(
                 (weightCell) => weightCell.xCord === xCord && weightCell.yCord === yCord
             );
-            var index = walls.findIndex(
+            let index = walls.findIndex(
                 (wall) => wall.xCord === xCord && wall.yCord === yCord
             );
             if(weightIndex > -1){
