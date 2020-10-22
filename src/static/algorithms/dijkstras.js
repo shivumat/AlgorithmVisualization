@@ -20,19 +20,23 @@ const getNeighbourNodeWithShortestDistnace = (currentNode, visitStatus, xOffset 
     var neighBourYCord = currentNode.yCord + yOffset;
     if(!isUnAccessibleNode(neighBourXCord, neighBourYCord, xLimit, yLimit, walls, visitStatus)){
         var neighbourIndex = visitStatus.findIndex((node) => node.visited === false && node.xCord === neighBourXCord && node.yCord === neighBourYCord)
-        if(neighbourIndex > -1 && visitStatus[neighbourIndex].pathWeight < currentNode.pathWeight + getCellWeight(visitStatus[neighbourIndex], currentNode, weights)){
-            visitStatus[neighbourIndex].pathWeight = currentNode.pathWeight + getCellWeight(visitStatus[neighbourIndex], currentNode, weights);
+        if(neighbourIndex > -1 && visitStatus[neighbourIndex].pathWeight < currentNode.pathWeight + getCellWeight(neighBourXCord, neighBourYCord, weights)){
+            visitStatus[neighbourIndex].pathWeight = currentNode.pathWeight + getCellWeight(neighBourXCord, neighBourYCord, weights);
             visitStatus[neighbourIndex].previous = {'xCord' : currentNode.xCord , 'yCord' : currentNode.yCord};
         }else if(neighbourIndex < 0){
-            visitStatus.push({'xCord' : neighBourXCord , 'yCord' : neighBourYCord, 'previous' : {'xCord' : currentNode.xCord , 'yCord' : currentNode.yCord}, 'pathWeight' : currentNode.pathWeight + getCellWeight(neighBourXCord, neighBourYCord, weights), 'visited' : false})
+            visitStatus.push({'xCord' : neighBourXCord , 'yCord' : neighBourYCord, 
+            'previous' : {'xCord' : currentNode.xCord , 'yCord' : currentNode.yCord}, 
+            'pathWeight' : currentNode.pathWeight + getCellWeight(neighBourXCord, neighBourYCord, weights), 
+            'visited' : false})
         }
     }
+    visitStatus.sort((node1,node2) => node1.pathWeight - node2.pathWeight);
     return visitStatus;
 }
 
-const getCellWeight = (cellA, cellB, weights) => {
-    //have to be implemented 
-    return 1;
+const getCellWeight = (xCord, yCord, weights) => {
+    var weightIndex = weights.findIndex((node) => node.xCord === xCord && node.yCord === yCord);
+    return weightIndex > -1 ?  parseInt(weights[weightIndex].weight) +1  : 1;
 }
 
 export default dijkstras;
