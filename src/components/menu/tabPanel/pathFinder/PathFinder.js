@@ -187,7 +187,8 @@ export default function PathFinder(props){
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
-                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked && weight > 0}/>
+                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked && weight > 0}
+                weights={weights}/>
             <Modal open={isLoading} BackdropProps={{className: 'loadingBackDrop'}}><div></div></Modal>
         </div>
     );

@@ -4,7 +4,7 @@ import './CellRow.css'
 
 export default function CellRow(props){
 
-    const { start, stop, visitStatus , path, walls} = props;
+    const { start, stop, visitStatus , path, walls, weights} = props;
 
     const isStartCell = (column) => column.xCord===start.xCord && props.yCord===start.yCord;
 
@@ -18,6 +18,8 @@ export default function CellRow(props){
 
     const isWallCell = (column) => walls.some((node) => column.xCord === node.xCord && props.yCord === node.yCord);
 
+    const isWeightCell = (column) => weights.some((node) => column.xCord === node.xCord && props.yCord === node.yCord);
+
     const columns = new Array(props.columns).fill().map((value, index) => (({
         xCord: index
       })));
@@ -26,7 +28,8 @@ export default function CellRow(props){
         <div className='cellRow'>
             {columns.map((column, i) => <Cell key={i} isStart={isStartCell(column)} isStop={isStopCell(column)}
                         xCord = {column.xCord} yCord = {props.yCord} isVisited={isVisitedCell(column)} {...props}
-                        isVisiting={isVisitingCell(column)} isPath={isPathCell(column)} isWallCell={isWallCell(column)}/>)}
+                        isVisiting={isVisitingCell(column)} isPath={isPathCell(column)} 
+                        isWallCell={isWallCell(column)} isWeightCell={isWeightCell(column)} />)}
         </div>
         );
 }
