@@ -22,8 +22,10 @@ export default function PathFinder(props){
     const [dragStop, setDragStop] = React.useState(false);
     const [mouseDown, setMouseDown] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
+    const [isWeightChecked, setIsWeightChecked] = React.useState(false);
     const [algo, setAlgo] = React.useState(DIJKSTRAS);
     const [speed, setSpeed] = React.useState(SLOW);
+    const [weight, setWeight] = React.useState(0);
 
     const getPathFromStop= () => {
         var node = stop;
@@ -126,6 +128,10 @@ export default function PathFinder(props){
         setSpeed(speed);
     }
 
+    function setFindAlgo(algo){
+        setAlgo(algo);
+    }
+
     function clearBlock(){
         setWalls([]);
         setWeights([]);
@@ -136,15 +142,25 @@ export default function PathFinder(props){
         setVisitStatus([]);
         setPath([]);
     }
+
+    function updateISWeightCehcked(isChecked){
+        setIsWeightChecked(isChecked);
+    }
+
+    function updateWeight(weight){
+        setWeight(weight);
+    }
+    
     return (
         <div className='pathFinder' onMouseDown={handelMouseDown} onMouseUp={handelMouseUp}>
-            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]} speeds={[SLOW, MEDIUM, FAST]}
-                setFindSpeed={setFindSpeed} clearBlock={clearBlock}/>
+            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]} 
+            speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} 
+            clearBlock={clearBlock} updateISWeightCehcked={updateISWeightCehcked} updateWeight={updateWeight}/>
             <Divider/>
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
-                visitStatus={visitStatus}/>
+                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked}/>
             <Modal open={isLoading} BackdropProps={{className: 'loadingBackDrop'}}><div></div></Modal>
         </div>
     );

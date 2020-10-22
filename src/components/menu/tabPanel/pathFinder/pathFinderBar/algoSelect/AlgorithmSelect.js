@@ -14,7 +14,7 @@ export default function AlgorithmSelect(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const {algos} = props;
+  const {algos,setFindAlgo} = props;
 
   const handleClick = () => {
     console.info(`You clicked ${algos[selectedIndex]}`);
@@ -23,6 +23,7 @@ export default function AlgorithmSelect(props) {
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setOpen(false);
+    setFindAlgo(algos[index])
   };
 
   const handleToggle = () => {
