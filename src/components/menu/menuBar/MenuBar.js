@@ -7,8 +7,10 @@ import menuItems from '../../../static/menuItems'
 export default function MenuBar(props){
 
     return  <AppBar position="static" color="default">
-                <Tabs value={props.value} onChange={props.handleChange} indicatorColor="primary" textColor="primary" centered>
-                    {menuItems.map((menu,i) => <Tab key={i} label={menu.label} icon={menu.menuIcon} />)}
+                <Tabs value={props.value} onChange={props.handleChange} indicatorColor="primary" 
+                textColor="primary" centered>
+                    {menuItems.map((menu,i) => <Tab key={i} label={menu.label} icon={menu.menuIcon} 
+                    disabled ={i.value !== 0}/>)}
                 </Tabs>
             </AppBar>
 }
