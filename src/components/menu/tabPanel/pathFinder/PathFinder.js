@@ -4,7 +4,7 @@ import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
 import Modal from '@material-ui/core/Modal';
 import findPath from '../../../../static/algorithms/index';
-import {DIJKSTRAS} from '../../../../static/enums/algos';
+import {DIJKSTRAS,ASTAR} from '../../../../static/enums/algos';
 import {SLOW, MEDIUM, FAST} from '../../../../static/enums/speeds';
 import './PathFinder.css';
 
@@ -27,11 +27,12 @@ export default function PathFinder(props){
     const [speed, setSpeed] = React.useState(SLOW);
     const [weight, setWeight] = React.useState(0);
 
-    const getPathFromStop= () => {
+    const getPathFromStop= (resultVisitStatus) => {
         var node = stop;
         var finalPath = [];
         while(node.xCord !== start.xCord || node.yCord !== start.yCord){
-            let pathNode = (visitStatus.find((visit) => visit.xCord === node.xCord && visit.yCord === node.yCord)).previous;
+            console.log('yes')
+            let pathNode = (resultVisitStatus.find((visit) => visit.xCord === node.xCord && visit.yCord === node.yCord)).previous;
             finalPath.push(pathNode);
             node = pathNode;
         }
@@ -51,6 +52,11 @@ export default function PathFinder(props){
                 i--;
             }
             if(!resultVisitStatus.some((node) => !node.visited)){
+                console.log(resultVisitStatus)
+                if(resultVisitStatus.some((node) => node.xCord === stop.xCord && node.yCord === stop.yCord)){
+                    var finalPath = getPathFromStop(resultVisitStatus);
+                    setPath(finalPath);
+                }
                 setIsLoading(false);
             }else{
                 setVisitStatus(resultVisitStatus);
@@ -60,7 +66,7 @@ export default function PathFinder(props){
             setIsLoading(false);
         }
        if(isLoading && visitStatus.length !== 0 && visitStatus.some((node) => node.visited && node.xCord === stop.xCord && node.yCord === stop.yCord)){
-            var finalPath = getPathFromStop();
+            var finalPath = getPathFromStop(visitStatus);
             setPath(finalPath);
         }
      },[isLoading, visitStatus, path] )
@@ -179,7 +185,7 @@ export default function PathFinder(props){
     
     return (
         <div className='pathFinder' onMouseDown={handelMouseDown} onMouseUp={handelMouseUp}>
-            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS]} 
+            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS,ASTAR]} 
             speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} 
             clearBlock={clearBlock} updateISWeightCehcked={updateISWeightCehcked} updateWeight={updateWeight}/>
             <Divider/>
