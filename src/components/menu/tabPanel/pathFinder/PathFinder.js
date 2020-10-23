@@ -31,7 +31,6 @@ export default function PathFinder(props){
         var node = stop;
         var finalPath = [];
         while(node.xCord !== start.xCord || node.yCord !== start.yCord){
-            console.log('yes')
             let pathNode = (resultVisitStatus.find((visit) => visit.xCord === node.xCord && visit.yCord === node.yCord)).previous;
             finalPath.push(pathNode);
             node = pathNode;
@@ -40,6 +39,11 @@ export default function PathFinder(props){
     }
 
     useEffect(() =>{
+        if(isLoading){
+            document.body.style.cursor = 'progress';
+        }else{
+            document.body.style.cursor = 'default';
+        }
         if(isLoading && visitStatus.length === 0){
             let resultVisitStatus = findPath(start, stop, walls, visitStatus, weights ,algo, columns, rows);
             setVisitStatus(resultVisitStatus)
@@ -143,14 +147,6 @@ export default function PathFinder(props){
         }
     }
 
-    function handelMouseDown(e){
-        setMouseDown(true);
-    }
-
-    function handelMouseUp(e){
-        setMouseDown(false);
-    }
-
     function startLoading(){
         clearBeforeLoading();
         setIsLoading(true);
@@ -184,7 +180,7 @@ export default function PathFinder(props){
     }
     
     return (
-        <div className='pathFinder' onMouseDown={handelMouseDown} onMouseUp={handelMouseUp}>
+        <div className='pathFinder'>
             <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS,ASTAR]} 
             speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} 
             clearBlock={clearBlock} updateISWeightCehcked={updateISWeightCehcked} updateWeight={updateWeight}/>
