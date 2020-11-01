@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import './Cell.css';
-import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
-import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
-import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
-import SettingsOverscanRoundedIcon from '@material-ui/icons/SettingsOverscanRounded';
-import StopIcon from '@material-ui/icons/Stop';
-import Icon from '@material-ui/core/Icon';
+import Start from '../../../cellIcons/Start';
+import Stop from '../../../cellIcons/Stop';
+import Weight from '../../../cellIcons/Weight';
+import Wall from '../../../cellIcons/Wall';
+import Path from '../../../cellIcons/Path';
+import Visited from '../../../cellIcons/Visited';
+import Visiting from '../../../cellIcons/Visiting';
 
 export default function Cell(props){
     const [isWall,setIsWall] = React.useState(false);
@@ -17,13 +18,13 @@ export default function Cell(props){
         isPath, isLoading, isWeightCell, weight} = props;
 
     function getCellContent(){
-        return  isStart ?   <PlayArrowRoundedIcon className='cellIcon'/> :
-                isStop  ?   <FlagRoundedIcon className='cellIcon'/>    : 
-                isWeight  ?   <Icon fontSize='small' className='weightCellIcon'>{cellWeight}</Icon>    :
-                isWall  ?   <StopIcon fontSize='large' className='cellIcon'/>    : 
-                isPath  ?   <SettingsOverscanRoundedIcon fontSize='large' className='cellPath'/>    : 
-                isVisited  ? <CheckCircleOutlineRoundedIcon className='cellVisited'/>    : 
-                isVisiting  ? <CheckCircleOutlineRoundedIcon color='primary' className='cellIcon'/>    : 
+        return  isStart     ?   <Start/>:
+                isStop      ?   <Stop/> : 
+                isWeight    ?   <Weight value={cellWeight} />   :
+                isWall      ?   <Wall/> : 
+                isPath      ?   <Path/> : 
+                isVisited   ?   <Visited/>  : 
+                isVisiting  ?   <Visiting/> : 
                         '';
     }
 

@@ -1,0 +1,17 @@
+.cellIcon {
+  width: 20px !important;
+  height: 20px !important;
+}
+.cellVisited {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: darkseagreen;
+}
+.cellPath {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: gold;
+}
+.weightCellIcon {
+  font-size: 1rem !important;
+}

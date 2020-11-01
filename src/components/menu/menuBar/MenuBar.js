@@ -10,7 +10,7 @@ export default function MenuBar(props){
                 <Tabs value={props.value} onChange={props.handleChange} indicatorColor="primary" 
                 textColor="primary" centered>
                     {menuItems.map((menu,i) => <Tab key={i} label={menu.label} icon={menu.menuIcon} 
-                    disabled ={i.value !== 0}/>)}
+                    disabled ={menu.value === 2}/>)}
                 </Tabs>
             </AppBar>
 }

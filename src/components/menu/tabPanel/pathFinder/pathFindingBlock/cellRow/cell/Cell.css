@@ -7,20 +7,3 @@
   float: left;
   border-radius: 15%;
 }
-.cellIcon {
-  width: auto !important;
-  height: auto !important;
-}
-.cellVisited {
-  width: auto !important;
-  height: auto !important;
-  background-color: darkseagreen;
-}
-.cellPath {
-  width: auto !important;
-  height: auto !important;
-  background-color: gold;
-}
-.weightCellIcon {
-  font-size: 1rem !important;
-}

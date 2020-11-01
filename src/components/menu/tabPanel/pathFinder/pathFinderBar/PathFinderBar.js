@@ -10,6 +10,7 @@ import WeightField from './weightField/WeightField'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SpeedSelect from './speedSelect/SpeedSelect';
 import './PathFinderBar.css'
+import Legends from './legends/Legends';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +49,7 @@ export default function PathFinderButtons(props) {
             {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
           </Fab>
           <div className={classes.grow} />
+          <Legends/>
           <SpeedSelect {...props}/>
         </Toolbar>
       </AppBar>
