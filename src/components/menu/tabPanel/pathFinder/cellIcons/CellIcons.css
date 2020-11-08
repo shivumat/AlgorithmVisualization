@@ -1,10 +1,12 @@
 .cellIcon {
   width: auto !important;
   height: auto !important;
+  margin-bottom: 1px;
 }
 .cellVisited {
   width: auto !important;
   height: auto !important;
+  margin-bottom: 1px;
   background-color: darkseagreen;
 }
 .cellPath {
