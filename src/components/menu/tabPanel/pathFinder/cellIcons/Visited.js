@@ -2,7 +2,7 @@ import React from 'react';
 import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 import './CellIcons.css';
 
-export default function Visited(){
+export default function Visited(props){
 
-    return  <CheckCircleOutlineRoundedIcon className='cellVisited'/>  
+    return  <CheckCircleOutlineRoundedIcon {...props} className='cellVisited'/>  
 }

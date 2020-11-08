@@ -1,6 +1,5 @@
 .pathFinderLegend {
-  border: 1px solid black;
-  border-radius: 5%;
+  border: 1px dotted black;
   margin-right: 40px;
 }
 .pathFinderLegendCell {
@@ -11,4 +10,10 @@
 }
 .pathFinderLegendLabel {
   font-size: 1.5vh;
+}
+#legendVisited {
+  width: 20px !important;
+}
+#legendVisiting {
+  width: 20px !important;
 }

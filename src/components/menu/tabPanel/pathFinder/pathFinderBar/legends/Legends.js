@@ -21,11 +21,11 @@ export default function Legends(){
                             <span className='pathFinderLegendLabel'>Stop</span>
                 </div>
                 <div className='pathFinderLegendCell'>
-                            <Visiting/>
+                            <Visiting id='legendVisiting'/>
                             <span className='pathFinderLegendLabel'>Visiting</span>
                 </div>
                 <div className='pathFinderLegendCell'>
-                            <Visited/>
+                            <Visited id='legendVisited'/>
                             <span className='pathFinderLegendLabel'>Visited</span>
                 </div>
                 <div className='pathFinderLegendCell'>
