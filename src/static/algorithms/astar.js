@@ -8,10 +8,10 @@ const aStarPathFinder = (start, stop, walls, visitStatus, weights, xLimit, yLimi
         var currentNodeIndex = resultVisitStatus.findIndex((node) => !node.visited);
         if(currentNodeIndex>-1){
             var currentNode = resultVisitStatus[currentNodeIndex];
-            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , -1, xLimit, yLimit, walls, weights);
-            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0, xLimit, yLimit, walls, weights);
-            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , 1, xLimit, yLimit, walls, weights);
-            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 1 , 0, xLimit, yLimit, walls, weights);
+            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , -1, xLimit, yLimit, walls, weights, stop);
+            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , -1 , 0, xLimit, yLimit, walls, weights, stop);
+            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 0 , 1, xLimit, yLimit, walls, weights, stop);
+            resultVisitStatus = getNeighbourNodeWithShortestDistnace(currentNode, resultVisitStatus , 1 , 0, xLimit, yLimit, walls, weights, stop);
             resultVisitStatus[currentNodeIndex].visited = true;
         }
     }
