@@ -3,9 +3,9 @@ import PathFinderButtons from './pathFinderBar/PathFinderBar';
 import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
 import Modal from '@material-ui/core/Modal';
-import findPath from '../../../../static/algorithms/index';
-import {DIJKSTRAS,ASTAR} from '../../../../static/enums/algos';
-import {SLOW, MEDIUM, FAST} from '../../../../static/enums/speeds';
+import findPath from '../../../../static/pathfinder/algorithms/index';
+import {DIJKSTRAS,ASTAR} from '../../../../static/pathfinder/enums/algos';
+import {SLOW, MEDIUM, FAST} from '../../../../static/pathfinder/enums/speeds';
 import './PathFinder.css';
 
 export default function PathFinder(props){
