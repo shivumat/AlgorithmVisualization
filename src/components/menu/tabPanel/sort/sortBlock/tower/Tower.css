@@ -1,0 +1,9 @@
+.towerBlock {
+  height: 5px;
+  width: 10px;
+}
+.tower {
+  float: left;
+  margin: 2.9px;
+  background-color: cadetblue;
+}

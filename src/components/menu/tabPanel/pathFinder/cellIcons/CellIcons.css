@@ -15,5 +15,6 @@
   background-color: gold;
 }
 .weightCellIcon {
-  font-size: 1rem !important;
+  font-size: 0.8rem !important;
+  vertical-align: top;
 }
