@@ -30,11 +30,15 @@ const useStyles = makeStyles((theme) => ({
 export default function SortBar(props) {
   const classes = useStyles();
 
+  function startLoading(){
+    props.startLoading();
+  }
+  
   return (
       <AppBar position="static" color="inherit" className={classes.appBar}>
         <Toolbar>
           <Fab color="primary" aria-label="add" className={classes.fabButton}>
-            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon/>}
+            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
           </Fab>
           <div className={classes.grow} />
         </Toolbar>
