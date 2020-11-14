@@ -7,7 +7,7 @@ import {BUBBLE} from '../../../../static/sort/enums/algos';
 import './Sort.css';
 
 export default function Sort(){
-    const sortLength = 70;
+    const sortLength = 40;
     const [sortArrayObject, setSortArrayObject] = useState({"sortArray" : [] , "isDone" : false});
     const [isLoading, setIsLoading] = useState(false);
 
