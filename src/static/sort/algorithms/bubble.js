@@ -1,6 +1,6 @@
-const bubble = (lowerComparingIndex, upperComparingIndex, array, upperLimit) => {
+const bubble = (lowerComparingIndex, upperComparingIndex, array, upperLimit, speed) => {
     let isDone = false;
-    let speed = 1;
+    let highlighted = [];
     while(speed!== 0){
         if(lowerComparingIndex === -1 && upperComparingIndex === -1){
             lowerComparingIndex = 1;
@@ -20,10 +20,14 @@ const bubble = (lowerComparingIndex, upperComparingIndex, array, upperLimit) => 
                 array[lowerComparingIndex] = temp;
                 }       
                 lowerComparingIndex++;
+                highlighted = [lowerComparingIndex-1, lowerComparingIndex]
+        }else{
+            highlighted = []
         }
         speed--;
     }
-    return {"sortArray" : array , "isDone" : isDone , "lowerComparingIndex" : lowerComparingIndex , "upperComparingIndex" : upperComparingIndex};
+    return {"sortArray" : array , "isDone" : isDone , "lowerComparingIndex" : lowerComparingIndex , "upperComparingIndex" : upperComparingIndex,
+            "highlighted" : highlighted};
 }
 
 export default bubble;

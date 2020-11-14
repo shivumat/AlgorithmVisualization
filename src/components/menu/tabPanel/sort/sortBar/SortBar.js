@@ -4,7 +4,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Fab from '@material-ui/core/Fab';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AlgorithmSelect from '../../common/algoSelect/AlgorithmSelect';
+import SpeedSelect from '../../common/speedSelect/SpeedSelect';
 import './SortBar.css'
 
 
@@ -37,10 +40,13 @@ export default function SortBar(props) {
   return (
       <AppBar position="static" color="inherit" className={classes.appBar}>
         <Toolbar>
+          <AlgorithmSelect {...props}/>
+          <Button variant="contained" color="primary" className="clearButton" onClick={props.reset}>RESET</Button>
           <Fab color="primary" aria-label="add" className={classes.fabButton}>
             {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
           </Fab>
           <div className={classes.grow} />
+          <SpeedSelect {...props}/>
         </Toolbar>
       </AppBar>
   );

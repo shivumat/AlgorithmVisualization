@@ -6,7 +6,7 @@ export default function Tower(props) {
 
   return (
     <Fade in={true} timeout = {{enter : 1000, exit: 1000}}>
-        <div className='tower'>
+        <div className={props.isHighlighted ? 'highlightedTower' : 'tower'}>
             {[...Array(props.value)].map((e, i) => <div key={i} className='towerBlock'></div>)}
         </div>
     </Fade>

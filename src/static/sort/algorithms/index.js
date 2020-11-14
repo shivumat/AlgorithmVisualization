@@ -1,7 +1,7 @@
 import bubble from './bubble'
 import {BUBBLE} from '../enums/algos';
 
-const sort = (upperLimit, algorithm, sortArrayObject) => {
+const sort = (upperLimit, algorithm, sortArrayObject, speed) => {
     if(algorithm === BUBBLE){
         let lowerComparingIndex = -1;
         let upperComparingIndex = -1;
@@ -11,7 +11,7 @@ const sort = (upperLimit, algorithm, sortArrayObject) => {
         if(sortArrayObject.upperComparingIndex !== undefined){
             upperComparingIndex = sortArrayObject.upperComparingIndex;
         }
-        return bubble(lowerComparingIndex, upperComparingIndex, sortArrayObject.sortArray, upperLimit);
+        return bubble(lowerComparingIndex, upperComparingIndex, sortArrayObject.sortArray, upperLimit, speed);
     }
 }
 

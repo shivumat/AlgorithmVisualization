@@ -1,9 +1,14 @@
 .towerBlock {
-  height: 10px;
-  width: 20px;
+  height: 1.2vh;
+  width: 1.15vw;
 }
 .tower {
   float: left;
-  margin: 3.8px;
+  margin: 0.29vw;
   background-color: cadetblue;
+}
+.highlightedTower {
+  float: left;
+  margin: 0.29vw;
+  background-color: greenyellow;
 }

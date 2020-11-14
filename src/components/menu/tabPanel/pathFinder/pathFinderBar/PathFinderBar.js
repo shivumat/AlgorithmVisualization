@@ -5,10 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import AlgorithmSelect from './algoSelect/AlgorithmSelect';
+import AlgorithmSelect from '../../common/algoSelect/AlgorithmSelect';
 import WeightField from './weightField/WeightField'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import SpeedSelect from './speedSelect/SpeedSelect';
+import SpeedSelect from '../../common/speedSelect/SpeedSelect';
 import './PathFinderBar.css'
 import Legends from './legends/Legends';
 
