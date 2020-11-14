@@ -1,16 +1,29 @@
 import React, {useState,useEffect} from 'react';
 import SortBar from './sortBar/SortBar';
 import SortBlock from './sortBlock/SortBlock';
-import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider';
+import sort from '../../../../static/sort/algorithms/index';
+import {BUBBLE} from '../../../../static/sort/enums/algos';
 import './Sort.css';
 
-export default function Sort(props){
+export default function Sort(){
     const sortLength = 70;
-    const [sortArray, setSortArray] = useState([]);
+    const [sortArrayObject, setSortArrayObject] = useState({"sortArray" : [] , "isDone" : false});
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() =>{
-        setSortArray(getJumbledArray(sortLength))
+        setSortArrayObject({...sortArrayObject , "sortArray" : getJumbledArray(sortLength)})
     },[])
+
+    useEffect(() =>{
+        if(isLoading && !sortArrayObject.isDone){
+            let resultArrayObject = sort(sortLength, BUBBLE, sortArrayObject);
+            setSortArrayObject(resultArrayObject);
+        }
+        if(isLoading && sortArrayObject.isDone){
+            setIsLoading(false);
+        }
+     },[isLoading, sortArrayObject] )
 
     const getJumbledArray = (length) => {
         for (var array=[],i=0;i<length;i++) array[i]=i+1;
@@ -25,18 +38,14 @@ export default function Sort(props){
     }
 
     const startLoading = () => {
-      let newArray = sortArray;
-      let temp = newArray[0];
-      newArray[0] = newArray[1];
-      newArray[1] = temp;
-      setSortArray([...newArray]);
+        setIsLoading(true);
     }
 
     return (
         <div className='sort'>
-            <SortBar startLoading={startLoading} />
+            <SortBar startLoading={startLoading} isLoading={isLoading}/>
             <Divider/>
-            <SortBlock sortArray={sortArray}/>
+            <SortBlock sortArray={sortArrayObject.sortArray}/>
         </div>
     );
 }
