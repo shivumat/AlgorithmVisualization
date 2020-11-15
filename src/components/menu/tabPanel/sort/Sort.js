@@ -4,7 +4,7 @@ import SortBlock from './sortBlock/SortBlock';
 import Divider from '@material-ui/core/Divider';
 import Modal from '@material-ui/core/Modal';
 import sort from '../../../../static/sort/algorithms/index';
-import {BUBBLE, SELECTION} from '../../../../static/sort/enums/algos';
+import {BUBBLE, SELECTION, INSERTION} from '../../../../static/sort/enums/algos';
 import {SLOW, MEDIUM, FAST} from '../../../../static/sort/enums/speeds';
 import './Sort.css';
 
@@ -63,7 +63,7 @@ export default function Sort(){
 
     return (
         <div className='sort'>
-            <SortBar startLoading={startLoading} isLoading={isLoading} algos={[BUBBLE, SELECTION]} 
+            <SortBar startLoading={startLoading} isLoading={isLoading} algos={[BUBBLE, SELECTION, INSERTION]} 
             speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} 
             reset={reset} />
             <Divider/>

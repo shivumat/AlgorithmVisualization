@@ -1,5 +1,3 @@
-import { ContactSupportOutlined } from "@material-ui/icons";
-
 const selection = (lowerComparingIndex, upperComparingIndex, array, upperLimit, minIndex) => {
     let isDone = false;
     let highlighted = [];
