@@ -6,7 +6,7 @@ const selection = (lowerComparingIndex, upperComparingIndex, array, upperLimit, 
         lowerComparingIndex = 0;
         upperComparingIndex = lowerComparingIndex + 1;
     }
-    if(lowerComparingIndex === upperLimit){
+    if(lowerComparingIndex >= upperLimit){
         isDone = true;
     }
     if(!isDone){

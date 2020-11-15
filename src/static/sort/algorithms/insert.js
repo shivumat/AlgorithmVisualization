@@ -8,7 +8,7 @@ const insert = (lowerComparingIndex, upperComparingIndex, array, upperLimit, cur
         upperComparingIndex = 1;
         toInsert = array[upperComparingIndex];
     }
-    if(upperComparingIndex === upperLimit){
+    if(upperComparingIndex >= upperLimit){
         isDone = true;
     }
     if(!isDone){

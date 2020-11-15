@@ -9,7 +9,7 @@ const bubble = (lowerComparingIndex, upperComparingIndex, array, upperLimit) => 
         lowerComparingIndex = 1;
         upperComparingIndex--;
     }
-    if(upperComparingIndex === 0){
+    if(upperComparingIndex < 1){
         isDone = true;
     }
     if(!isDone){
