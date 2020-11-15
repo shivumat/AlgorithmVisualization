@@ -18,11 +18,12 @@ export default [
         "menuIcon"  :   <SortIcon />,
         "value"     :   1,
         "tabPanel"  :   <Sort/>
-    },
-    {
-        "label"     :   "Data Structure",
-        "menuIcon"  :   <StorageIcon />,
-        "value"     :   2,
-        "tabPanel"  :   <DataStructure/>
     }
+    // ,
+    // {
+    //     "label"     :   "Data Structure",
+    //     "menuIcon"  :   <StorageIcon />,
+    //     "value"     :   2,
+    //     "tabPanel"  :   <DataStructure/>
+    // }
 ]

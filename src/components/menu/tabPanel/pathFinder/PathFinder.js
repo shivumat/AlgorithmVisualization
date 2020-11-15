@@ -10,10 +10,10 @@ import './PathFinder.css';
 
 export default function PathFinder(props){
 
-    const rows = 21;
+    const rows = 25;
     const columns = 61;
-    const [start, setStart] = React.useState({'xCord' : 15, 'yCord' : 10});
-    const [stop, setStop] = React.useState({'xCord' : 45, 'yCord' : 10});
+    const [start, setStart] = React.useState({'xCord' : 15, 'yCord' : 12});
+    const [stop, setStop] = React.useState({'xCord' : 45, 'yCord' : 12});
     const [walls, setWalls] = React.useState([]);
     const [path, setPath] = React.useState([]);
     const [visitStatus, setVisitStatus] = React.useState([]);
