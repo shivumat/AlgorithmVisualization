@@ -34,7 +34,9 @@ export default function SortBar(props) {
   const classes = useStyles();
 
   function startLoading(){
-    props.startLoading();
+    if(!props.isLoading){
+      props.startLoading();
+    }
   }
   
   return (
@@ -42,8 +44,8 @@ export default function SortBar(props) {
         <Toolbar>
           <AlgorithmSelect {...props}/>
           <Button variant="contained" color="primary" className="clearButton" onClick={props.reset}>RESET</Button>
-          <Fab color="primary" aria-label="add" className={classes.fabButton}>
-            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
+          <Fab color="primary" aria-label="add" className={classes.fabButton} onClick={startLoading}>
+            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon/>}
           </Fab>
           <div className={classes.grow} />
           <SpeedSelect {...props}/>

@@ -36,7 +36,9 @@ export default function PathFinderButtons(props) {
   const classes = useStyles();
 
   function startLoading(){
-    props.startLoading();
+    if(!props.isLoading){
+      props.startLoading();
+    }
   }
 
   return (
@@ -45,8 +47,8 @@ export default function PathFinderButtons(props) {
           <AlgorithmSelect {...props}/>
           <Button variant="contained" color="primary" className="clearButton" onClick={props.clearBlock}>CLEAR</Button>
           <WeightField {...props} />
-          <Fab color="primary" aria-label="add" className={classes.fabButton}>
-            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon onClick={startLoading}/>}
+          <Fab color="primary" aria-label="add" className={classes.fabButton} onClick={startLoading}>
+            {props.isLoading ? <CircularProgress className='loadingProgress' color="inherit"/>:<PlayArrowIcon />}
           </Fab>
           <div className={classes.grow} />
           <Legends/>
