@@ -4,7 +4,7 @@ import PathFindingBlock from './pathFindingBlock/PathFindingBlock';
 import Divider from '@material-ui/core/Divider';
 import Modal from '@material-ui/core/Modal';
 import findPath from '../../../../static/pathfinder/algorithms/index';
-import {DIJKSTRAS,ASTAR} from '../../../../static/pathfinder/enums/algos';
+import {DIJKSTRAS,ASTAR,BFS} from '../../../../static/pathfinder/enums/algos';
 import {SLOW, MEDIUM, FAST} from '../../../../static/pathfinder/enums/speeds';
 import './PathFinder.css';
 
@@ -26,6 +26,7 @@ export default function PathFinder(props){
     const [algo, setAlgo] = React.useState(DIJKSTRAS);
     const [speed, setSpeed] = React.useState(SLOW);
     const [weight, setWeight] = React.useState(0);
+    const [weightDisabled, setWeightDisabled] = React.useState(false);
 
     const getPathFromStop= (resultVisitStatus) => {
         var node = stop;
@@ -73,7 +74,13 @@ export default function PathFinder(props){
             var finalPath = getPathFromStop(visitStatus);
             setPath(finalPath);
         }
-     },[isLoading, visitStatus, path] )
+        if(algo === BFS){
+            setWeightDisabled(true);
+            setWeights([]);
+        }else{
+            setWeightDisabled(false)
+        }
+     },[isLoading, visitStatus, path, algo] )
 
     function mouseDownOnCell(xCord, yCord){
         setMouseDown(true);
@@ -110,7 +117,7 @@ export default function PathFinder(props){
     }  
 
     function addOrRemoveWallOrWeight(xCord, yCord) {
-        if(isWeightChecked && weight > 0){
+        if(isWeightChecked && weight > 0 && !weightDisabled){
             let wallIndex = walls.findIndex(
                 (wall) => wall.xCord === xCord && wall.yCord === yCord
             );
@@ -179,17 +186,21 @@ export default function PathFinder(props){
         setWeight(weight);
     }
     
+    function updateWeightDisabled(disabled){
+        setWeightDisabled(disabled);
+    }
+    
     return (
         <div className='pathFinder'>
-            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS,ASTAR]} 
-            speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} 
-            clearBlock={clearBlock} updateISWeightCehcked={updateISWeightCehcked} updateWeight={updateWeight}/>
+            <PathFinderButtons isLoading={isLoading} startLoading={startLoading} algos={[DIJKSTRAS,ASTAR,BFS]} 
+            speeds={[SLOW, MEDIUM, FAST]} setFindSpeed={setFindSpeed} setFindAlgo={setFindAlgo} weightDisabled={weightDisabled}
+            clearBlock={clearBlock} updateISWeightCehcked={updateISWeightCehcked} updateWeight={updateWeight} updateWeightDisabled={updateWeightDisabled}/>
             <Divider/>
             <PathFindingBlock rows={rows} columns={columns} start={start} stop={stop} isMouseDown={mouseDown}
                 isDragStart ={dragStart} isDragStop={dragStop} mouseUpOnCell={mouseUpOnCell} walls={walls}
                 cellOnHover={cellOnHover} mouseDownOnCell={mouseDownOnCell} path = {path} isLoading={isLoading}
-                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked && weight > 0}
-                weights={weights}/>
+                visitStatus={visitStatus} weight={weight} isWeightChecked={isWeightChecked && weight > 0 && !weightDisabled}
+                weights={weights} weightDisabled={weightDisabled}/>
             <Modal open={isLoading} BackdropProps={{className: 'loadingBackDrop'}}><div></div></Modal>
         </div>
     );

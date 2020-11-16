@@ -5,7 +5,7 @@ import './WeightField.css'
 
 export default function WeightField(props) {
 
-    const {updateISWeightCehcked, updateWeight}= props;
+    const {updateISWeightCehcked, updateWeight, weightDisabled}= props;
 
   const toggleIsWeight = (event) => {
     updateISWeightCehcked(event.target.checked);
@@ -30,6 +30,7 @@ export default function WeightField(props) {
             onChange={toggleIsWeight}
             color="primary"
             inputProps={{ 'aria-label': 'secondary checkbox' }}
+            disabled={weightDisabled}
 
         />
         <TextField
@@ -37,6 +38,7 @@ export default function WeightField(props) {
           type="number"
           label="Weight"
           error={false}
+          disabled={weightDisabled}
           onChange={onWeightChange}
           onInput={onWeightInput}
           InputLabelProps={{
